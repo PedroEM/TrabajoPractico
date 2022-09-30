@@ -6,14 +6,14 @@ public class Materia implements Informacion {
     LinkedList<Estudiante> coleccionEstudiantes = new LinkedList<Estudiante>();
 
     void agregarEstudiante(Estudiante estudiante){
-        if(coleccionEstudiantes.add(estudiante)) {
+        if(this.coleccionEstudiantes.add(estudiante)) {
             System.out.println("Estudiante agregado");
         }else{
             System.out.println("Error al agregar el estudiante");
         }
     };
     void eliminarEstudiante(String nombre){
-        ListIterator<Estudiante> iterador = coleccionEstudiantes.listIterator();
+        ListIterator<Estudiante> iterador = this.coleccionEstudiantes.listIterator();
         while (iterador.hasNext()){
             String estudiante = iterador.next().getNombre();
             if (estudiante == nombre){
@@ -24,6 +24,7 @@ public class Materia implements Informacion {
         }
         System.out.println("Estudiante no encontrado");
     };
+
     void modificarTitular(Profesor profesor){
         this.setTitular(profesor);
     };
@@ -35,11 +36,11 @@ public class Materia implements Informacion {
 
     @Override
     public String listarContenidos(){
-        String contenido[] = new String[coleccionEstudiantes.size()];
-        for (int i=0;i<coleccionEstudiantes.size();i++){
-            contenido[i] = coleccionEstudiantes.get(i).getApellido() + " " + coleccionEstudiantes.get(i).getNombre();
+        String contenido = "";
+        for (int i=0;i<this.coleccionEstudiantes.size();i++){
+            contenido += this.coleccionEstudiantes.get(i).getApellido() + " " + this.coleccionEstudiantes.get(i).getNombre() + " - ";
         }
-        return contenido.toString();
+        return contenido;
     }
 
     public String getNombre() {
@@ -61,9 +62,9 @@ public class Materia implements Informacion {
     @Override
     public String toString() {
         return "Materia{" +
-                "nombre='" + nombre + '\'' +
-                ", titular=" + titular +
-                ", coleccionEstudiantes=" + coleccionEstudiantes +
+                "nombre='" + this.nombre + '\'' +
+                ", titular=" + this.titular +
+                ", coleccionEstudiantes=" + this.listarContenidos() +
                 '}';
     }
 }
